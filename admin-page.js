@@ -32,7 +32,7 @@ const SettingsPage = () => {
       const result = await response.json();
       setSettings(result.data);
     } catch (error) {
-      console.error('Ошибка загрузки настроек:', error);
+      console.error('Error loading settings:', error);
     }
   };
 
@@ -42,7 +42,7 @@ const SettingsPage = () => {
       const result = await response.json();
       setStatus(result.data);
     } catch (error) {
-      console.error('Ошибка загрузки статуса:', error);
+      console.error('Error loading status:', error);
     }
   };
 
@@ -58,11 +58,11 @@ const SettingsPage = () => {
       });
       
       const result = await response.json();
-      setMessage('Настройки сохранены успешно!');
+      setMessage('Settings saved successfully!');
       setTimeout(() => setMessage(''), 3000);
     } catch (error) {
-      setMessage('Ошибка сохранения настроек');
-      console.error('Ошибка сохранения:', error);
+      setMessage('Error saving settings');
+      console.error('Error saving:', error);
     }
     setLoading(false);
   };
@@ -110,18 +110,18 @@ const SettingsPage = () => {
           fontSize: '1.1rem',
           margin: 0
         }
-      }, 'Универсальный генератор слагов для всех content-types')
+      }, 'Universal slug generator for all content-types')
     ),
 
     // Сообщение об успехе
     message && React.createElement('div', {
       style: {
-        backgroundColor: message.includes('Ошибка') ? '#fef2f2' : '#f0f9ff',
-        border: `2px solid ${message.includes('Ошибка') ? '#f87171' : '#60a5fa'}`,
+        backgroundColor: message.includes('Error') ? '#fef2f2' : '#f0f9ff',
+        border: `2px solid ${message.includes('Error') ? '#f87171' : '#60a5fa'}`,
         borderRadius: '10px',
         padding: '1rem 1.5rem',
         marginBottom: '1.5rem',
-        color: message.includes('Ошибка') ? '#dc2626' : '#1d4ed8',
+        color: message.includes('Error') ? '#dc2626' : '#1d4ed8',
         fontWeight: '600',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
       }
@@ -145,7 +145,7 @@ const SettingsPage = () => {
           fontSize: '1.3rem',
           fontWeight: '700'
         }
-      }, '✅ Статус плагина'),
+      }, '✅ Plugin Status'),
       React.createElement('div', {
         style: { 
           marginBottom: '0.5rem',
@@ -153,14 +153,14 @@ const SettingsPage = () => {
           color: '#374151',
           fontWeight: '500'
         }
-      }, `Найдено content-types: ${status.contentTypesCount}`),
+      }, `Found content-types: ${status.contentTypesCount}`),
       React.createElement('div', {
         style: { 
           fontSize: '0.875rem', 
           color: '#6b7280',
           fontStyle: 'italic'
         }
-      }, `Последнее обновление: ${new Date(status.lastUpdate).toLocaleString()}`)
+      }, `Last update: ${new Date(status.lastUpdate).toLocaleString()}`)
     ),
 
     // Основные настройки
@@ -181,15 +181,15 @@ const SettingsPage = () => {
           fontSize: '1.3rem',
           fontWeight: '700'
         }
-      }, '⚙️ Настройки'),
+      }, '⚙️ Settings'),
 
       // Переключатели
       ...[
-        { key: 'enabled', label: 'Включить плагин', desc: 'Глобальное включение/выключение' },
-        { key: 'updateExistingSlugs', label: 'Обновлять существующие слаги', desc: 'Перегенерировать при изменении title' },
-        { key: 'handleRichText', label: 'Поддержка Rich Text', desc: 'Извлекать текст из Rich Text Blocks и классического Rich Text' },
-        { key: 'supportCyrillic', label: 'Поддержка кириллицы', desc: 'Транслитерация русских символов' },
-        { key: 'addSuffixForUnique', label: 'Суффиксы для уникальности', desc: 'Добавлять -1, -2, -3 для уникальных слагов' }
+        { key: 'enabled', label: 'Enable plugin', desc: 'Global enable/disable' },
+        { key: 'updateExistingSlugs', label: 'Update existing slugs', desc: 'Regenerate when title changes' },
+        { key: 'handleRichText', label: 'Rich Text support', desc: 'Extract text from Rich Text Blocks and classic Rich Text' },
+        { key: 'supportCyrillic', label: 'Cyrillic support', desc: 'Transliteration of Russian characters' },
+        { key: 'addSuffixForUnique', label: 'Suffixes for uniqueness', desc: 'Add -1, -2, -3 for unique slugs' }
       ].map(item => 
         React.createElement('div', {
           key: item.key,
@@ -282,7 +282,7 @@ const SettingsPage = () => {
           fontSize: '1.3rem',
           fontWeight: '700'
         }
-      }, '📝 Поля источника'),
+      }, '📝 Source Fields'),
       
       // Основное поле
       React.createElement('div', {
@@ -296,7 +296,7 @@ const SettingsPage = () => {
             color: '#374151',
             marginBottom: '0.5rem'
           }
-        }, 'Основное поле для генерации слага'),
+        }, 'Main field for slug generation'),
         React.createElement('select', {
           value: settings.sourceField,
           onChange: (e) => setSettings(prev => ({ ...prev, sourceField: e.target.value })),
@@ -324,7 +324,7 @@ const SettingsPage = () => {
             marginTop: '0.5rem',
             lineHeight: '1.4'
           }
-        }, 'Поле, из которого будет генерироваться слаг в первую очередь')
+        }, 'Field from which the slug will be generated first')
       ),
       
       // Резервное поле  
@@ -337,7 +337,7 @@ const SettingsPage = () => {
             color: '#374151',
             marginBottom: '0.5rem'
           }
-        }, 'Резервное поле'),
+        }, 'Fallback field'),
         React.createElement('select', {
           value: settings.fallbackField,
           onChange: (e) => setSettings(prev => ({ ...prev, fallbackField: e.target.value })),
@@ -357,7 +357,7 @@ const SettingsPage = () => {
           React.createElement('option', { value: 'label' }, 'label'),
           React.createElement('option', { value: 'heading' }, 'heading'),
           React.createElement('option', { value: 'caption' }, 'caption'),
-          React.createElement('option', { value: '' }, 'Не использовать')
+          React.createElement('option', { value: '' }, 'Do not use')
         ),
         React.createElement('p', {
           style: {
@@ -366,7 +366,7 @@ const SettingsPage = () => {
             marginTop: '0.5rem',
             lineHeight: '1.4'
           }
-        }, 'Используется, если основное поле пустое или отсутствует')
+        }, 'Used if the main field is empty or missing')
       )
     ),
 
@@ -388,7 +388,7 @@ const SettingsPage = () => {
           fontSize: '1.3rem',
           fontWeight: '700'
         }
-      }, '🔧 Настройки генерации слагов'),
+      }, '🔧 Slug Generation Settings'),
       
       // Локаль
       React.createElement('div', {
@@ -402,7 +402,7 @@ const SettingsPage = () => {
             color: '#374151',
             marginBottom: '0.5rem'
           }
-        }, 'Локаль для транслитерации'),
+        }, 'Locale for transliteration'),
         React.createElement('select', {
           value: settings.slugifyOptions?.locale || 'ru',
           onChange: (e) => setSettings(prev => ({ 
@@ -423,14 +423,14 @@ const SettingsPage = () => {
             fontWeight: '500'
           }
         },
-          React.createElement('option', { value: 'ru' }, 'Русская (ru)'),
-          React.createElement('option', { value: 'en' }, 'Английская (en)'),
-          React.createElement('option', { value: 'de' }, 'Немецкая (de)'),
-          React.createElement('option', { value: 'fr' }, 'Французская (fr)'),
-          React.createElement('option', { value: 'es' }, 'Испанская (es)'),
-          React.createElement('option', { value: 'it' }, 'Итальянская (it)'),
-          React.createElement('option', { value: 'pl' }, 'Польская (pl)'),
-          React.createElement('option', { value: 'tr' }, 'Турецкая (tr)')
+          React.createElement('option', { value: 'ru' }, 'Russian (ru)'),
+          React.createElement('option', { value: 'en' }, 'English (en)'),
+          React.createElement('option', { value: 'de' }, 'German (de)'),
+          React.createElement('option', { value: 'fr' }, 'French (fr)'),
+          React.createElement('option', { value: 'es' }, 'Spanish (es)'),
+          React.createElement('option', { value: 'it' }, 'Italian (it)'),
+          React.createElement('option', { value: 'pl' }, 'Polish (pl)'),
+          React.createElement('option', { value: 'tr' }, 'Turkish (tr)')
         ),
         React.createElement('p', {
           style: {
@@ -439,7 +439,7 @@ const SettingsPage = () => {
             marginTop: '0.5rem',
             lineHeight: '1.4'
           }
-        }, 'Локаль влияет на транслитерацию символов. Например: "ё" → "e" (ru) или "yo" (en)')
+        }, 'Locale affects character transliteration. For example: "ё" → "e" (ru) or "yo" (en)')
       )
     ),
 
@@ -478,7 +478,7 @@ const SettingsPage = () => {
             e.target.style.transform = 'translateY(0)';
           }
         }
-      }, loading ? 'Сохранение...' : 'Сохранить настройки')
+      }, loading ? 'Saving...' : 'Save Settings')
     )
   );
 };

@@ -18,25 +18,25 @@ module.exports = ({ strapi }) => ({
       
       // Валидируем настройки
       if (typeof body.enabled !== 'boolean') {
-        return ctx.throw(400, 'enabled должно быть boolean');
+        return ctx.throw(400, 'enabled must be boolean');
       }
       
       if (body.sourceField && typeof body.sourceField !== 'string') {
-        return ctx.throw(400, 'sourceField должно быть строкой');
+        return ctx.throw(400, 'sourceField must be a string');
       }
       
       if (body.fallbackField && typeof body.fallbackField !== 'string') {
-        return ctx.throw(400, 'fallbackField должно быть строкой');
+        return ctx.throw(400, 'fallbackField must be a string');
       }
       
       // Обновляем настройки через хранилище
       const updatedSettings = settingsStore.updateSettings(body);
       
-      console.log('🔧 [Auto Slug Manager] Настройки обновлены через API');
+      console.log('🔧 [Auto Slug Manager] Settings updated via API');
       
       ctx.body = { 
         data: updatedSettings,
-        message: 'Настройки обновлены успешно'
+        message: 'Settings updated successfully'
       };
     } catch (error) {
       ctx.throw(500, error);

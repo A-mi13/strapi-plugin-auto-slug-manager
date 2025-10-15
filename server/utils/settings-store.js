@@ -33,7 +33,7 @@ module.exports = {
         ...(pluginConfig.slugifyOptions || {})
       }
     };
-    console.log('🔧 [Settings Store] Настройки инициализированы из конфигурации плагина:', settingsStore);
+    console.log('🔧 [Settings Store] Settings initialized from plugin config:', settingsStore);
     return { ...settingsStore };
   },
 
@@ -46,7 +46,7 @@ module.exports = {
       ...settingsStore,
       ...newSettings
     };
-    console.log('💾 [Settings Store] Настройки обновлены:', settingsStore);
+    console.log('💾 [Settings Store] Settings updated:', settingsStore);
     return { ...settingsStore };
   },
 
